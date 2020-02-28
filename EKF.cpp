@@ -1,6 +1,6 @@
 #include "EKF.h"
 
-void State::f(double dt)
+void f(State &x, double dt)
 {
     // Euler discretized dynamics of a dubins vehicle
     // xdot = v cos(x)
@@ -13,10 +13,10 @@ void State::f(double dt)
 
 }
 
-MatrixXd State::DF(double dt)
+MatrixXd DF(State &x, double dt)
 {
     // Returns the jacobian of the system f()
-    int n = this->GetN();
+    int n = x.n;
     float v = p[0], r = p[1];
     MatrixXd J(n,n);
 
@@ -28,11 +28,11 @@ MatrixXd State::DF(double dt)
 void EKF::Update(State &X, VectorXd &M)
 {
     // Takes the current state X and a new measurement M and predicts the state and updates according to the EKF algorithm
-    MatrixXd J = X.DF(dt);
+    MatrixXd J = X.DF(X,dt);
     
     //predict next state
 
-    X.f(dt); 
+    X.f(X,dt); 
     P = J*P*J.transpose() + Q;
 
     // update

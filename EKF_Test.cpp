@@ -38,7 +38,7 @@ int main()
     // Model parameters (velocity, radius)
     p << 5, 40;
     
-    State X(x0,p);
+    State X(x0,p,f,DF);
 
     ifstream measurements;
     ofstream Output;

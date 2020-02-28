@@ -11,11 +11,14 @@ class State
 public:
     VectorXd x; //states
     VectorXd p; //parameters
+    int n;
+    function<void(State &x, double dt)> f;
+    function<MatrixXd(State &x, double dt) DF;
 
-    State(VectorXd x, VectorXd p) : x(x), p(p) {};
-    void f(double dt);
-    MatrixXd DF(double dt);
-    int GetN() {return this->x.size();}
+    State(VectorXd x, VectorXd p, function<void(State x, double dt)> f,function<MatrixXd(State x, double dt) DF) 
+    : x(x), p(p), n(x.size()), f(f), DF(DF) 
+    {};
+
 };
 
 
