@@ -1,29 +1,6 @@
 #include "EKF.h"
 
-void f(State &x, double dt)
-{
-    // Euler discretized dynamics of a dubins vehicle
-    // xdot = v cos(x)
-    // ydot = v sin(y)
-    // thetadot = v/r  <-- produces a circle of radius r
-    float v = p[0], r = p[1];
-    x[0] = x[0] + dt*(v*cos(x[2]));
-    x[1] = x[1] + dt*(v*sin(x[2]));
-    x[2] = x[2] + dt*(v/r);
 
-}
-
-MatrixXd DF(State &x, double dt)
-{
-    // Returns the jacobian of the system f()
-    int n = x.n;
-    float v = p[0], r = p[1];
-    MatrixXd J(n,n);
-
-    J << 1, 0, -dt*v*sin(x[2]), 0, 1, dt*v*cos(x[2]), 0, 0, 1;
-
-    return J;
-}
 
 void EKF::Update(State &X, VectorXd &M)
 {

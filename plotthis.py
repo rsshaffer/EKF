@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-""""
-This python script plots the simulated sensor measurements in m.txt and the output of the EKF Filtered.txt
-""""
+
+#This python script plots the simulated sensor measurements in m.txt and the output of the EKF Filtered.txt
+
 
 filename = "Filtered.txt"
 filename2 = "m.txt"

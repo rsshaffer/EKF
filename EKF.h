@@ -13,9 +13,9 @@ public:
     VectorXd p; //parameters
     int n;
     function<void(State &x, double dt)> f;
-    function<MatrixXd(State &x, double dt) DF;
+    function<MatrixXd(State &x, double dt)> DF;
 
-    State(VectorXd x, VectorXd p, function<void(State x, double dt)> f,function<MatrixXd(State x, double dt) DF) 
+    State(VectorXd x, VectorXd p, function<void(State &x, double dt)> f,function<MatrixXd(State &x, double dt)> DF) 
     : x(x), p(p), n(x.size()), f(f), DF(DF) 
     {};
 
